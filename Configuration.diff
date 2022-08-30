@@ -1,0 +1,23 @@
+﻿diff --git "a/.\\Configuration.h" "b/.\\Marlin\\Configuration.h"
+index 4b608b0..a2ab938 100644
+--- "a/.\\Configuration.h"
++++ "b/.\\Marlin\\Configuration.h"
+@@ -584,11 +584,17 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
+         #define PROBE_FAIL_TEMP_TIME 30 // How long (in seconds) to hold the temperatures after probing fails
+       #endif
+       #define REWIPE // Re-attempts wiping
++      #define DUAL_WIPERS // Enable if using dual wiper pads
+       #ifdef REWIPE
+-        #define NUM_REWIPES 6 // Number of (back-and-forth) re-wipe attemps to make, e.g. 6 would produce 12 strokes
++        //#define NUM_REWIPES 6 // Number of (back-and-forth) re-wipe attemps to make, e.g. 6 would produce 12 strokes
++        #define NUM_REWIPES 6 // Default of 6 (12 strokes) was too much, reduced to 3 [SW]
+         // Re-wipe line from REWIPE_FIRST_PT to REWIPE_SECOND_PT
+         #define REWIPE_FIRST_PT {115, 173}
+         #define REWIPE_SECOND_PT {45, 173}
++        #ifdef DUAL_WIPERS
++          #define DUAL_REWIPE_FIRST_PT {108, 182}
++          #define DUAL_REWIPE_SECOND_PT {52, 182}
++        #endif
+         #define Z_REWIPE_PT (Z_MIN_POS + 1) // Depth to re-wipe at
+       #endif
+     #endif

@@ -1,0 +1,19 @@
+﻿diff --git "a/.\\Marlin_main.cpp" "b/.\\Marlin\\Marlin_main.cpp"
+index d4434a6..7b16eb1 100644
+--- "a/.\\Marlin_main.cpp"
++++ "b/.\\Marlin\\Marlin_main.cpp"
+@@ -1596,6 +1596,14 @@ static void setup_for_endstop_move() {
+             do_blocking_move_to_xy(rewipe_second_pt[X_AXIS], rewipe_second_pt[Y_AXIS]);
+             do_blocking_move_to_xy(rewipe_first_pt[X_AXIS], rewipe_first_pt[Y_AXIS]);
+           }
++          #ifdef DUAL_WIPERS
++            do_blocking_move_to_z(Z_RETRY_PT);
++            float dual_rewipe_first_pt[2] = DUAL_REWIPE_FIRST_PT;
++            float dual_rewipe_second_pt[2] = DUAL_REWIPE_SECOND_PT;
++            do_blocking_move_to_xy(dual_rewipe_first_pt[X_AXIS], dual_rewipe_first_pt[Y_AXIS]);
++            do_blocking_move_to_z(Z_REWIPE_PT);
++            do_blocking_move_to_xy(dual_rewipe_second_pt[X_AXIS], dual_rewipe_second_pt[Y_AXIS]);
++          #endif
+         #endif
+         do_blocking_move_to_z(Z_RETRY_PT);
+         do_blocking_move_to_x(LEFT_PROBE_BED_POSITION);
